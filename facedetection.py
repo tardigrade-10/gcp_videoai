@@ -1,12 +1,12 @@
 import io
 import os
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'firstone-324011-f6cd661a4a94.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'service_account_key'  # just paste the path for json file downloaded from gcp project
 
 from google.cloud import  videointelligence
 client = videointelligence.VideoIntelligenceServiceClient()
 
-gs_uri = 'gs://first_bucket92328/video.mp4'
+gs_uri = 'googlecloudfileuri'  # paste the path of file uploaded on google cloud's bucket
 
 features = [videointelligence.Feature.LABEL_DETECTION]
 
