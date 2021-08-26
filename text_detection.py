@@ -1,19 +1,20 @@
 import os
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'firstone-324011-f6cd661a4a94.json'
-
 
 """Detect text in a video stored on GCS."""
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'service_account_key'  # just paste the path for json file downloaded from gcp project
+
 from google.cloud import videointelligence
+client = videointelligence.VideoIntelligenceServiceClient()
+
+video_path = 'googlecloudfileuri'  # paste the path uri of file uploaded on google cloud's bucket
 
 video_client = videointelligence.VideoIntelligenceServiceClient()
 features = [videointelligence.Feature.TEXT_DETECTION]
 
-path1 = 'gs://first_bucket92328/video.mp4'
-path2 = 'gs://first_bucket92328/video2.mp4'
-path3 = 'gs://first_bucket92328/video3.mp4'
+
 
 operation = video_client.annotate_video(
-    request={"features": features, "input_uri": path2}
+    request={"features": features, "input_uri": video_path}
 )
 
 print("\nProcessing video for text detection.")
