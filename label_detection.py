@@ -1,8 +1,11 @@
 import argparse
 import os
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'firstone-324011-f6cd661a4a94.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'service_account_key'  # just paste the path for json file downloaded from gcp project
 
 from google.cloud import videointelligence
+client = videointelligence.VideoIntelligenceServiceClient()
+
+video_path = 'googlecloudfileuri'  # paste the path uri of file uploaded on google cloud's bucket
 
 def analyze_labels(path):
     """ Detects labels given a GCS path. """
@@ -46,10 +49,7 @@ if __name__ == "__main__":
     # )
     # parser.add_argument('path', help="GCS file path for label detection.")
     # args = parser.parse_args()
-    path1 = 'gs://first_bucket92328/video.mp4'
-    path2 = 'gs://first_bucket92328/video2.mp4'
-    path3 = 'gs://first_bucket92328/video3.mp4'
-    analyze_labels(path3)
+    analyze_labels(video_path)
 
 
 # python label_detection.py
