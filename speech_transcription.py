@@ -1,7 +1,13 @@
 """Transcribe speech from a video stored on GCS."""
 from google.cloud import videointelligence
 import os
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'firstone-324011-f6cd661a4a94.json'
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'service_account_key'  # just paste the path for json file downloaded from gcp project
+
+from google.cloud import videointelligence
+client = videointelligence.VideoIntelligenceServiceClient()
+
+video_path = 'googlecloudfileuri'  # paste the path uri of file uploaded on google cloud's bucket
 
 video_client = videointelligence.VideoIntelligenceServiceClient()
 features = [videointelligence.Feature.SPEECH_TRANSCRIPTION]
@@ -11,14 +17,10 @@ config = videointelligence.SpeechTranscriptionConfig(
 )
 video_context = videointelligence.VideoContext(speech_transcription_config=config)
 
-path1 = 'gs://first_bucket92328/video.mp4'
-path2 = 'gs://first_bucket92328/video2.mp4'
-path3 = 'gs://first_bucket92328/video3.mp4'
-
 operation = video_client.annotate_video(
     request={
         "features": features,
-        "input_uri": path2,
+        "input_uri": video_path,
         "video_context": video_context,
     }
 )
