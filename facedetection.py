@@ -6,11 +6,11 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'service_account_key'  # just pas
 from google.cloud import  videointelligence
 client = videointelligence.VideoIntelligenceServiceClient()
 
-gs_uri = 'googlecloudfileuri'  # paste the path of file uploaded on google cloud's bucket
+video_path = 'googlecloudfileuri'  # paste the path of file uploaded on google cloud's bucket
 
 features = [videointelligence.Feature.LABEL_DETECTION]
 
-operation = client.annotate_video(gs_uri, features = features)
+operation = client.annotate_video(video_path, features = features)
 
 result = operation.result(timeout=300)
 
